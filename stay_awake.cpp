@@ -10,14 +10,7 @@ SCROLL LOCK key (VK_SCROLL).
 
 #include <windows.h>
 #include <time.h>
-
-void delay(int number_of_seconds)
-{
-   int milli_seconds = 1000 * number_of_seconds;
-   clock_t start_time = clock();
-   while (clock() < start_time + milli_seconds)
-      ;
-}
+#include <unistd.h>
 
 void SetNumLock(BOOL bState)
 {
@@ -58,6 +51,7 @@ int toggle = 0;
          toggle = 0;
          SetNumLock(FALSE);
       }
-      delay(600);
+      // 
+      usleep(60000000);
    } 
 }
