@@ -7,47 +7,66 @@
 //#include <stdio.h>
 //#include <stdlib.h>
 
+/*
+The following sample program turns the NUM LOCK light on if it is off.
+The SetNumLock function defined here simulates pressing the NUM LOCK key,
+using keybd_event() with a virtual key of VK_NUMLOCK. It takes a boolean
+value that indicates whether the light should be turned off (FALSE) or on (TRUE).
 
-using namespace std;
+The same technique can be used for the CAPS LOCK key (VK_CAPITAL) and the
+SCROLL LOCK key (VK_SCROLL).
+*/
+
+// using namespace std;
 
 void delay(int number_of_seconds)
 {
-    int milli_seconds = 1000 * number_of_seconds;
-    clock_t start_time = clock();
-    while (clock() < start_time + milli_seconds);
+   int milli_seconds = 1000 * number_of_seconds;
+   clock_t start_time = clock();
+   while (clock() < start_time + milli_seconds)
+      ;
 }
 
-int main(){
+void SetNumLock(BOOL bState)
+{
+   BYTE keyState[256];
 
-   int x = 1, y = 400;
-   POINT xypos;
+   GetKeyboardState((LPBYTE)&keyState);
+   if ((bState && !(keyState[VK_NUMLOCK] & 1)) ||
+       (!bState && (keyState[VK_NUMLOCK] & 1)))
+   {
+      // Simulate a key press
+      keybd_event(VK_NUMLOCK,
+                  0x45,
+                  KEYEVENTF_EXTENDEDKEY | 0,
+                  0);
 
-   while (1) {
-      SetCursorPos(x, y);
-      //usleep(10000000);
-      
-      if (x == 1) {
-         x = 400;
-         y = 1;
-      } else { 
-         x = 1;
-         y = 400;
+      // Simulate a key release
+      keybd_event(VK_NUMLOCK,
+                  0x45,
+                  KEYEVENTF_EXTENDEDKEY | KEYEVENTF_KEYUP,
+                  0);
+   }
+}
+
+int main()
+{
+
+int toggle = 0;
+   
+   while (1)
+   {
+      if (toggle == 0)
+      {
+         toggle = 1;
+         SetNumLock(TRUE);
       }
-      // //printf("\n");
-      // printf("C:\\Users\\c1121002>");
-      // delay(5);
-      // printf("ping 8.8.8.8\n");
-      // delay(1);
-      // printf("Reply from 8.8.8.8: bytes=32 time=7ms TTL=53\n");
-      // delay(1);
-      // printf("Reply from 8.8.8.8: bytes=32 time=7ms TTL=58\n");
-      // delay(1);
-      // printf("Reply from 8.8.8.8: bytes=32 time=7ms TTL=47\n");
-      // delay(1);
-      // printf("Reply from 8.8.8.8: bytes=32 time=7ms TTL=55\n");
-      // printf("C:\\Users\\c1121002>");
-      delay(10);
-      // system("CLS");
-      // //return 0;
+      else
+      {
+         toggle = 0;
+         SetNumLock(FALSE);
+      }
+
+      delay(2);
    }
 }
