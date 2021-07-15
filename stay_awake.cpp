@@ -1,10 +1,12 @@
 #include <windows.h>
-#include <iostream>
-#include <conio.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include <time.h>
+
+//#include <iostream>
+//#include <conio.h>
+//#include <unistd.h>
+//#include <stdio.h>
+//#include <stdlib.h>
+
 
 using namespace std;
 
@@ -27,7 +29,7 @@ int main(){
       if (x == 1) {
          x = 400;
          y = 1;
-      } else {
+      } else { 
          x = 1;
          y = 400;
       }
@@ -44,7 +46,7 @@ int main(){
       // delay(1);
       // printf("Reply from 8.8.8.8: bytes=32 time=7ms TTL=55\n");
       // printf("C:\\Users\\c1121002>");
-      delay(5);
+      delay(10);
       // system("CLS");
       // //return 0;
    }
