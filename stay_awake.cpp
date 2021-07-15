@@ -67,6 +67,6 @@ int toggle = 0;
          SetNumLock(FALSE);
       }
 
-      delay(2);
+      delay(600);
    }
 }
