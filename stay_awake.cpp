@@ -1,12 +1,3 @@
-#include <windows.h>
-#include <time.h>
-
-//#include <iostream>
-//#include <conio.h>
-//#include <unistd.h>
-//#include <stdio.h>
-//#include <stdlib.h>
-
 /*
 The following sample program turns the NUM LOCK light on if it is off.
 The SetNumLock function defined here simulates pressing the NUM LOCK key,
@@ -17,7 +8,8 @@ The same technique can be used for the CAPS LOCK key (VK_CAPITAL) and the
 SCROLL LOCK key (VK_SCROLL).
 */
 
-// using namespace std;
+#include <windows.h>
+#include <time.h>
 
 void delay(int number_of_seconds)
 {
@@ -66,7 +58,6 @@ int toggle = 0;
          toggle = 0;
          SetNumLock(FALSE);
       }
-
       delay(600);
-   }
+   } 
 }
