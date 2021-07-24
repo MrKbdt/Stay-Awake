@@ -14,19 +14,16 @@ Virtual-Key Codes
 https://docs.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes
 
 Also creates a visual in the command shell which emulates a waiting command prompt.
-The user will enter there Windows user ID so the prompt looks correct, or just 
+The user will enter their Windows user ID so the prompt looks correct, or just 
 hit enter if you're lazy like me.
 
 */
 
 #include <windows.h>
-#include <time.h>
 #include <unistd.h>
-// #include <stdio>
-#include <process.h>
 #include <stdio.h>
 
-#define MAX_CHARS 20
+#define MAX_CHARS 10
 
 void SetNumLock(BOOL bState)
 {
@@ -41,18 +38,21 @@ void SetNumLock(BOOL bState)
 
 int main()
 {
-   int toggle = 0;
-   char userID[MAX_CHARS];
 
+   char userID[MAX_CHARS];
+   int toggle = 0;
+   
    printf("Enter your Windows user ID: ");
 
    fgets(userID, MAX_CHARS, stdin);
    userID[strcspn(userID, "\n")] = 0;
 
-   system("cls");
-   printf("Microsoft Windows [Version 10.0.18363.1646]\n(c) Microsoft Corporation. All rights reserved.\n\nC:\\Users\\%s>", userID);
-
    system("title Command Prompt");
+   system("cls");
+   printf("Microsoft Windows [Version 10.0.18363.1646]\n"
+          "(c) Microsoft Corporation. All rights reserved.\n\n"
+          "C:\\Users\\%s>",
+          userID);
 
    while (1)
    {
@@ -66,6 +66,8 @@ int main()
          toggle = 0;
          SetNumLock(FALSE);
       }
-      usleep(60000000);
+      // usleep(300000000); // 300 seconds / 5 mins
+      // usleep(60000000); // 60 seconds
+      usleep(3000000); // 3 seconds for testing
    }
 }
