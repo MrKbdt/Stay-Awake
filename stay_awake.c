@@ -38,12 +38,10 @@ void SetNumLock(BOOL bState)
 
 int main()
 {
-
    char userID[MAX_CHARS];
    int toggle = 0;
    
    printf("Enter your Windows user ID: ");
-
    fgets(userID, MAX_CHARS, stdin);
    userID[strcspn(userID, "\n")] = 0;
 
